@@ -30,13 +30,13 @@ export default function SignupForm() {
         type="password"
         placeholder="Confirm Password"
       />
-      <LoginButton />
+      <SignUpButton />
       <p className="font-light text-center text-red-400"> *{state.message}</p>
     </form>
   );
 }
 
-function LoginButton() {
+function SignUpButton() {
   const { pending } = useFormStatus();
 
   return (

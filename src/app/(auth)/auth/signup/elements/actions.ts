@@ -36,7 +36,7 @@ export async function createUser(
       message: validatedFields.error.errors[0].message,
     };
   }
-  const { email, username } = validatedFields.data;
+  const { email, username, password } = validatedFields.data;
 
   const existingUser = await User.findOne({
     $or: [{ email: email }, { username: username }],
@@ -50,7 +50,13 @@ export async function createUser(
   }
 
   try {
-    const user = await User.create(validatedFields.data);
+    const user = await User.create({
+      username: username,
+      password: password,
+      email: email,
+      role: "user",
+      image: "empty",
+    });
 
     if (!user) {
       return { success: false, message: "User not created." };
@@ -61,6 +67,8 @@ export async function createUser(
       message: "User created successfully. Please sign in.",
     };
   } catch (error) {
+    console.error(error);
+
     return {
       success: false,
       message: "An error occurred while creating the user.",

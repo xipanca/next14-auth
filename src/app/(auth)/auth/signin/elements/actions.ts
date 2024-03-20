@@ -1,6 +1,7 @@
 "use server";
 import { signIn } from "@/lib/auth";
 import { AuthError } from "next-auth";
+
 export async function LoginUser(
   prevState: string | undefined,
   formData: FormData

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import SwitchTheme from "@/components/switch-theme";
 import AuthProvider from "@/components/authProvider";
+import Nav from "@/components/nav-menu/nav";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -34,9 +35,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Nav />
             {children}
+
+            <SwitchTheme />
           </ThemeProvider>
-          <SwitchTheme />
         </body>
       </html>
     </AuthProvider>

@@ -1,5 +1,6 @@
 import mongoose, { Document, Model, Schema, model, models } from "mongoose";
 import bcrypt from "bcrypt";
+
 enum Provider {
   credentials = "credentials",
   discord = "discord",
@@ -9,7 +10,8 @@ interface IUser extends Document {
   username: string;
   email: string;
   password?: string;
-  image?: string;
+  image: string;
+  role: string;
   provider: Provider;
 }
 
@@ -31,11 +33,17 @@ const UserSchema: Schema = new Schema({
   },
   image: {
     type: String,
+    required: true,
     default: "",
   },
   password: {
     type: String,
     required: false,
+  },
+  role: {
+    type: String,
+    required: true,
+    default: "user",
   },
 });
 

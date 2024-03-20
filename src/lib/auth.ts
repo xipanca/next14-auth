@@ -4,6 +4,7 @@ import { authConfig } from "./auth.config";
 import { z } from "zod";
 import User from "@/lib/mongo/UserSchema";
 import dbConnect from "@/lib/mongo/mongodb";
+import { revalidatePath } from "next/cache";
 
 async function getUser(
   identifier: { key: string; value: string },
@@ -47,10 +48,13 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
             password
           );
           if (!user) return null;
+
           return {
             id: user._id.toString(),
-            name: user.username,
+            username: user.username,
+            image: user.image || "",
             email: user.email,
+            role: user.role,
           };
         }
 
